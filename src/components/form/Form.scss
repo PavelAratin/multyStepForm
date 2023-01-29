@@ -28,5 +28,9 @@
     padding: 10px;
     color: $MarineBlue;
     margin-top: 10px;
+    &:hover,
+    &:focus{
+      box-shadow: 0px 0px 0px 1px $PastelBlue;
+    }
   }
 }

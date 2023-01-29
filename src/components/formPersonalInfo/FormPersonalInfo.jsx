@@ -12,11 +12,11 @@ const FormPersonalInfo = () => {
       </label>
       <label className="form__label">
         Email Adress
-        <input className="form__input" type="text" placeholder="Email" name="email" required></input>
+        <input className="form__input" type="email" placeholder="Email" name="email" required></input>
       </label>
       <label className="form__label">
         Phone Number
-        <input className="form__input" type="tel" placeholder="8(999)999-99-99" name="telephone" required></input>
+        <input className="form__input" type="tel" placeholder="8-(999)-999-99-99" name="telephone" required></input>
       </label>
     </React.Fragment>
   )
