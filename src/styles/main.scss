@@ -1,0 +1,33 @@
+@import './variables.scss';
+
+*{
+  box-sizing: border-box;
+}
+
+body{
+  margin: 0;
+  font-family: 'Ubuntu',sans-serif;
+  background-color: $LightBlue;
+  display: flex;
+  font-size: 14px;
+  font-weight: 400;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+h1,h2,h3,h4 {
+  margin: 0;
+}
+ul{
+  margin: 0;
+  padding: 0;
+}
+li{
+  list-style-type: none;
+}
+p{
+  margin: 0;
+}
+button{
+  padding: 0;
+}

@@ -1,0 +1,47 @@
+@import '../../styles/variables.scss';
+
+.form-aside{
+  padding: 20px 30px;
+  background-image: url('../../../public/images/bg-sidebar-desktop.svg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 5px;
+  min-width: 230px;
+  &__item{
+    display: flex;
+    align-items: center;
+    &:not(:last-child){
+      margin-bottom: 30px;
+    }
+  }
+  &__number{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid $White;
+    border-radius: 100%;
+    text-align: center;
+    color: $White;
+    margin-right: 15px;
+    &.active{
+      color: $MarineBlue;
+      background-color: $LightBlue;
+      border: 1px solid $LightBlue;
+    }
+  }
+  &__step{
+    color: $LightGray;
+    font-size: 12px;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+  &__step-title{
+    color: $White;
+    font-size: 14px;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+}

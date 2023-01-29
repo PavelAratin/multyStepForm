@@ -1,7 +1,24 @@
+// import FormWrapper from "./components/formWrapper/FormWrapper";
+import FormAside from "./components/formAside/FormAside";
+import FormWrapper from "./components/formWrapper/FormWrapper";
+import Form from "./components/form/Form";
+import FormPersonalInfo from "./components/formPersonalInfo/FormPersonalInfo";
+import FormButtonsWrapper from "./components/formButtons/FormButtonsWrapper";
+import ButtonGoBack from "./components/formButtons/ButtonGoBack";
+import ButtonNextStep from "./components/formButtons/ButtonNextStep";
 
 function App() {
   return (
-    <h1>React APP</h1>
+    <FormWrapper>
+      <FormAside></FormAside>
+      <Form>
+        <FormPersonalInfo></FormPersonalInfo>
+        <FormButtonsWrapper>
+          <ButtonGoBack></ButtonGoBack>
+          <ButtonNextStep></ButtonNextStep>
+        </FormButtonsWrapper>
+      </Form>
+    </FormWrapper>
   );
 }
 

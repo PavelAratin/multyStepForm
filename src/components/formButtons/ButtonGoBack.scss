@@ -1,0 +1,13 @@
+@import '../../styles/variables.scss';
+.form__button-goback{
+  background-color: transparent;
+  border: none;
+  color: $MarineBlue;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s linear;
+  &:hover{
+    color: $StrawberryRed;
+  }
+}
