@@ -1,0 +1,59 @@
+@import '../../styles/variables.scss';
+.form-finish{
+  padding: 15px;
+  border-radius: 5px;
+  background-color: $LightBlue;
+  &__head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid $CoolGray;
+  }
+  &__wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+  &__item{
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__title{
+    color: $MarineBlue;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  &__select-title{
+    color: $CoolGray;
+  }
+  &__select-price{
+    color: $MarineBlue;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  &__change{
+    color: hsl(227, 33%, 45%);
+  }
+  &__arcade-price{
+    color: $MarineBlue;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+.form-finish-footer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  &__select-title{
+    color: $CoolGray;
+  }
+  &__total-price{
+    color: $PurplishBlue;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
