@@ -1,8 +1,6 @@
-import './ButtonNextStep.scss';
+import "./ButtonNextStep.scss";
 
 const ButtonNextStep = () => {
-  return (
-    <button className='form__button-nextstep'>Next Step</button>
-  )
-}
+  return <button className="form__button-nextstep">Next Step</button>;
+};
 export default ButtonNextStep;

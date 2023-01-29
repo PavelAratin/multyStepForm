@@ -1,10 +1,14 @@
-import './Form.scss';
+import "./Form.scss";
 
 const Form = ({ children }) => {
+  const submitFormHandler = (e) => {
+    e.preventDefault();
+  };
   return (
-    <form className='form'>{children}</form>
-  )
-}
-
+    <form onSubmit={submitFormHandler} className="form">
+      {children}
+    </form>
+  );
+};
 
 export default Form;
