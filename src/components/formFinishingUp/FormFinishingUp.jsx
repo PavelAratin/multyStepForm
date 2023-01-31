@@ -1,11 +1,13 @@
 import React from "react";
+import ButtonGoBack from "../formButtons/ButtonGoBack";
+import ButtonNextStep from "../formButtons/ButtonNextStep";
 import "./FormFinishingUp.scss";
 
 const FormFinishingUp = () => {
   return (
-    <React.Fragment>
-      <h1 className="form__title">Finishing up</h1>
-      <p className="form__subtitle">
+    <form className="form-finishing-up">
+      <h1 className="form-finishing-up__title">Finishing up</h1>
+      <p className="form-finishing-up__subtitle">
         Double-check everything looks OK before confirming.
       </p>
       <div className="form-finish">
@@ -28,10 +30,16 @@ const FormFinishingUp = () => {
         </ul>
       </div>
       <div className="form-finish-footer">
-        <span className="form-finish-footer__select-title">Total (per month)</span>
+        <span className="form-finish-footer__select-title">
+          Total (per month)
+        </span>
         <span className="form-finish-footer__total-price">+$2/mo</span>
-        </div>
-    </React.Fragment>
+      </div>
+      <div className="form-buttons">
+        <ButtonGoBack></ButtonGoBack>
+        <ButtonNextStep text='Confirm'></ButtonNextStep>
+      </div>
+    </form>
   );
 };
 

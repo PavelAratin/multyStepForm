@@ -1,5 +1,5 @@
 @import '../../styles/variables.scss';
-.form__button-nextstep{
+.form-buttons__button-nextstep{
   border: none;
   background-color: $MarineBlue;
   padding: 10px;
@@ -9,6 +9,7 @@
   transition: background 0.2s linear,
   color 0.2s linear;
   cursor: pointer;
+  margin-left: auto;
   &:hover{
     background-color: $PurplishBlue;
     color: $StrawberryRed;

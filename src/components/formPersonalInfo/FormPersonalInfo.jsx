@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import ButtonGoBack from "../formButtons/ButtonGoBack";
+import ButtonNextStep from "../formButtons/ButtonNextStep";
 import "./FormPersonalInfo.scss";
 
-const FormPersonalInfo = ({getPersonalInfoValidate}) => {
+const FormPersonalInfo = ({changeFormPersonalVisible}) => {
   const [inputName, setInputName] = useState("");
   const [inputNameValidate, setInputNameValidate] = useState(false);
   const [inputEmail, setInputEmail] = useState("");
   const [inputEmailValidate, setInputEmailValidate] = useState(false);
   const [inputTelephone, setInputTelephone] = useState("");
   const [inputTelephoneValidate, setInputTelephoneValidate] = useState(false);
-  const [allInputsvalidate,setAllInputsvalidate] = useState(false);
+  // const [allInputsvalidate, setAllInputsvalidate] = useState(false);
+  const [buttonPersonalFormDisabled, setButtonPersonalFormDisabled] =
+    useState(true);
   //regexp на числа в инпуте телефона
   const hasOnlyDigits = (v) => /^\d+$/.test(v);
   //валидация инпута имени
@@ -17,9 +21,10 @@ const FormPersonalInfo = ({getPersonalInfoValidate}) => {
   };
   const getInputNameBlurHandler = () => {
     if (inputName.trim() !== "") {
-      setInputNameValidate(true);
-    } else {
-      console.log("поле пустое");
+      setInputNameValidate((previousState) => !previousState);
+    }
+    if (inputName.trim() == "") {
+      setInputNameValidate((previousState) => !previousState);
     }
   };
   //валидация инпута email
@@ -28,9 +33,10 @@ const FormPersonalInfo = ({getPersonalInfoValidate}) => {
   };
   const getInputEmailBlurHandler = () => {
     if (inputEmail.trim() !== "" && inputEmail.includes("@")) {
-      setInputEmailValidate(true);
-    } else {
-      console.log("поле пустое");
+      setInputEmailValidate((previousState) => !previousState);
+    }
+    if (inputEmail.trim() == "") {
+      setInputEmailValidate((previousState) => !previousState);
     }
   };
   //валидация инпута нормер телефона
@@ -39,61 +45,75 @@ const FormPersonalInfo = ({getPersonalInfoValidate}) => {
   };
   const getInputTelephoneBlurHandler = () => {
     if (inputTelephone.trim() !== "" && hasOnlyDigits(inputTelephone)) {
-      setInputTelephoneValidate(true);
-    } else {
+      setInputTelephoneValidate((previousState) => !previousState);
+    }
+    if (inputTelephone.trim() == "") {
+      setInputTelephoneValidate((previousState) => !previousState);
     }
   };
 
-  if(inputNameValidate && inputEmailValidate && inputTelephoneValidate){
-    getPersonalInfoValidate(true)
-  }
+  useEffect(() => {
+    if (inputNameValidate && inputEmailValidate && inputTelephoneValidate) {
+      setButtonPersonalFormDisabled((previousState) => !previousState);
+    }
+  }, [inputNameValidate, inputEmailValidate, inputTelephoneValidate]);
 
+  const submitFormHandler = (e) => {
+    e.preventDefault();
+    changeFormPersonalVisible()
+  };
   return (
-    <React.Fragment>
-      <h1 className="form__title">Personal Info</h1>
-      <p className="form__subtitle">
+    <form
+      className="form-personal-info"
+      onSubmit={submitFormHandler}
+    >
+      <h1 className="form-personal-info__title">Personal Info</h1>
+      <p className="form-personal-info__subtitle">
         Plese provide name, email adress, and phone number.
       </p>
-      <label className="form__label">
+      <label className="form-personal-info__label">
         Name
         <input
           value={inputName}
           onChange={getInputNameHandler}
           onBlur={getInputNameBlurHandler}
-          className="form__input"
+          className="form-personal-info__input"
           type="text"
           placeholder="Name"
           name="name"
-          required
         ></input>
       </label>
-      <label className="form__label">
+      <label className="form-personal-info__label">
         Email Adress
         <input
           value={inputEmail}
           onChange={getInputEmailHandler}
           onBlur={getInputEmailBlurHandler}
-          className="form__input"
+          className="form-personal-info__input"
           type="email"
           placeholder="Email"
           name="email"
-          required
         ></input>
       </label>
-      <label className="form__label">
+      <label className="form-personal-info__label">
         Phone Number
         <input
           value={inputTelephone}
           onChange={getInputTelephoneHandler}
           onBlur={getInputTelephoneBlurHandler}
-          className="form__input"
+          className="form-personal-info__input"
           type="tel"
           placeholder="8-(999)-999-99-99"
           name="telephone"
-          required
         ></input>
       </label>
-    </React.Fragment>
+      <div className="form-buttons">
+        <ButtonGoBack></ButtonGoBack>
+        <ButtonNextStep
+          buttonPersonalFormDisabled={buttonPersonalFormDisabled}
+        ></ButtonNextStep>
+      </div>
+    </form>
   );
 };
 

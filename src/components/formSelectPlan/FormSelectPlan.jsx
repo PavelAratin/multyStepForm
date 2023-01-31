@@ -1,11 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./FormSelectPlan.scss";
+import ButtonGoBack from "../formButtons/ButtonGoBack";
+import ButtonNextStep from "../formButtons/ButtonNextStep";
 
-const FormSelectPlan = () => {
+const FormSelectPlan = ({changePickAddOneVisible}) => {
+  const [arcadeInputIs, setArcadeInputIs] = useState(false);
+  const [advancedInputIs, setAdvancedInputIs] = useState(false);
+  const [proInputIs, setProInputIs] = useState(false);
+  const [formValidate, setFormValidate] = useState(false);
+  const [buttonSelectplaneDisabled, setButtonSelectplaneDisabled] = useState(true);
+
+  const arcadeInputHandler = () => {
+    setArcadeInputIs(true);
+  };
+  const advancedInputHandler = () => {
+    setAdvancedInputIs(true);
+  };
+  const proInputHandler = () => {
+    setProInputIs(true);
+  };
+  const submitFormHandler = (e) => {
+    e.preventDefault();
+    if (arcadeInputIs || advancedInputIs || proInputIs) {
+      setFormValidate(true);
+      changePickAddOneVisible()
+    }
+  };
+
+  useEffect(()=>{
+    if (arcadeInputIs || advancedInputIs || proInputIs) {
+      setFormValidate(true);
+      setButtonSelectplaneDisabled(false);
+    }
+  },[arcadeInputIs,advancedInputIs,proInputIs])
   return (
-    <React.Fragment>
-      <h1 className="form__title">Select you plan</h1>
-      <p className="form__subtitle">
+    <form className="form-select-plan" onSubmit={submitFormHandler}>
+      <h1 className="form-select-plan__title">Select you plan</h1>
+      <p className="form-select-plan__subtitle">
         Yuo have the opinion of monthly or yearly billing.
       </p>
       <ul className="form-radio-list">
@@ -29,7 +60,9 @@ const FormSelectPlan = () => {
             <input
               className="form-radio-list__input"
               type="radio"
-              name="arcade"
+              name="pickAddOne"
+              value="arcade"
+              onChange={arcadeInputHandler}
             ></input>
             <span className="form-radio-list__overlay"></span>
             <span className="form-radio-list__title">Arcade</span>
@@ -37,7 +70,8 @@ const FormSelectPlan = () => {
           </label>
         </li>
         <li className="form-radio-list__item">
-          <svg className="form-radio-list__svg"
+          <svg
+            className="form-radio-list__svg"
             xmlns="http://www.w3.org/2000/svg"
             width="40"
             height="40"
@@ -55,7 +89,9 @@ const FormSelectPlan = () => {
             <input
               className="form-radio-list__input"
               type="radio"
-              name="arcade"
+              name="pickAddOne"
+              value="advance"
+              onChange={advancedInputHandler}
             ></input>
             <span className="form-radio-list__overlay"></span>
             <span className="form-radio-list__title">Advanced</span>
@@ -63,7 +99,8 @@ const FormSelectPlan = () => {
           </label>
         </li>
         <li className="form-radio-list__item">
-          <svg className="form-radio-list__svg"
+          <svg
+            className="form-radio-list__svg"
             xmlns="http://www.w3.org/2000/svg"
             width="40"
             height="40"
@@ -81,7 +118,9 @@ const FormSelectPlan = () => {
             <input
               className="form-radio-list__input"
               type="radio"
-              name="arcade"
+              name="pickAddOne"
+              value="pro"
+              onChange={proInputHandler}
             ></input>
             <span className="form-radio-list__overlay"></span>
             <span className="form-radio-list__title">Pro</span>
@@ -89,7 +128,13 @@ const FormSelectPlan = () => {
           </label>
         </li>
       </ul>
-    </React.Fragment>
+      <div className="form-buttons">
+        <ButtonGoBack></ButtonGoBack>
+        <ButtonNextStep
+          buttonSelectplaneDisabled={buttonSelectplaneDisabled}
+        ></ButtonNextStep>
+      </div>
+    </form>
   );
 };
 

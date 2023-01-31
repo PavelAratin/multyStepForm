@@ -1,4 +1,19 @@
 @import '../../styles/variables';
+.form-add-once{
+  display: flex;
+  flex-direction: column;
+  padding: 20px 50px;
+  &__title{
+    font-size: 24px;
+    color: $MarineBlue;
+    margin-bottom: 10px;
+  }
+  &__subtitle{
+    font-size: 16px;
+    color: $LightGray;
+    margin-bottom: 20px;
+  }
+}
 .form-addonce-list{
   &__item{
     padding: 10px;

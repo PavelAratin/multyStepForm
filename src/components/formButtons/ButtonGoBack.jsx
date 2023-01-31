@@ -2,7 +2,7 @@ import './ButtonGoBack.scss';
 
 const ButtonGoBack = () => {
   return (
-    <button className='form__button-goback'>Go Back</button>
+    <button className='form-buttons__button-goback'>Go Back</button>
   )
 }
 
