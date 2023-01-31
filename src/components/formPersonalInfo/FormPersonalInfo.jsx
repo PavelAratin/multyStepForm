@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ButtonGoBack from "../formButtons/ButtonGoBack";
 import ButtonNextStep from "../formButtons/ButtonNextStep";
+import { useDispatch } from "react-redux";
+import { nameActions,emailActions,phoneActions } from "../../store/store";
 import "./FormPersonalInfo.scss";
 
-const FormPersonalInfo = ({changeFormPersonalVisible}) => {
+const FormPersonalInfo = ({ changeFormPersonalVisible }) => {
   const [inputName, setInputName] = useState("");
   const [inputNameValidate, setInputNameValidate] = useState(false);
   const [inputEmail, setInputEmail] = useState("");
@@ -58,15 +60,20 @@ const FormPersonalInfo = ({changeFormPersonalVisible}) => {
     }
   }, [inputNameValidate, inputEmailValidate, inputTelephoneValidate]);
 
-  const submitFormHandler = (e) => {
-    e.preventDefault();
-    changeFormPersonalVisible()
-  };
+    //работа со store redux
+    const nameDispatch = useDispatch();
+    const emailDispatch = useDispatch();
+    const phoneDispatch = useDispatch();
+    
+    const submitFormHandler = (e) => {
+      e.preventDefault();
+      changeFormPersonalVisible();
+      nameDispatch(nameActions(inputName))
+      emailDispatch(emailActions(inputEmail))
+      phoneDispatch(phoneActions(inputTelephone))
+    };
   return (
-    <form
-      className="form-personal-info"
-      onSubmit={submitFormHandler}
-    >
+    <form className="form-personal-info" onSubmit={submitFormHandler}>
       <h1 className="form-personal-info__title">Personal Info</h1>
       <p className="form-personal-info__subtitle">
         Plese provide name, email adress, and phone number.

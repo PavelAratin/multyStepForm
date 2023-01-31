@@ -58,6 +58,15 @@
     font-weight: 600;
   }
 }
+.user-info-list{
+  margin-bottom: 10px;
+  &__item{
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
 .form-finish-footer{
   display: flex;
   align-items: center;

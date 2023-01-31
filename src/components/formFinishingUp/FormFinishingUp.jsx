@@ -1,9 +1,13 @@
 import React from "react";
 import ButtonGoBack from "../formButtons/ButtonGoBack";
 import ButtonNextStep from "../formButtons/ButtonNextStep";
+import { useSelector } from "react-redux";
 import "./FormFinishingUp.scss";
 
 const FormFinishingUp = () => {
+  const inputName = useSelector((state) => state[0].inputName);
+  const inputEmail = useSelector((state) => state[1].inputEmail);
+  const inputPhone = useSelector((state) => state[2].inputPhone);
   return (
     <form className="form-finishing-up">
       <h1 className="form-finishing-up__title">Finishing up</h1>
@@ -11,6 +15,20 @@ const FormFinishingUp = () => {
         Double-check everything looks OK before confirming.
       </p>
       <div className="form-finish">
+        <ul className="user-info-list">
+          <li className="user-info-list__item">
+            <div className="form-finish__title">Имя пользвателя:</div>
+            <div className="form-finish__select-title">{inputName}</div>
+          </li>
+          <li className="user-info-list__item">
+            <div className="form-finish__title">Email пользвателя:</div>
+            <div className="form-finish__select-title">{inputEmail}</div>
+          </li>
+          <li className="user-info-list__item">
+            <div className="form-finish__title">Телефон пользвателя:</div>
+            <div className="form-finish__select-title">{inputPhone}</div>
+          </li>
+        </ul>
         <div className="form-finish__head">
           <div className="form-finish__wrapper">
             <span className="form-finish__title">Arcade (Monthly)</span>
@@ -37,7 +55,7 @@ const FormFinishingUp = () => {
       </div>
       <div className="form-buttons">
         <ButtonGoBack></ButtonGoBack>
-        <ButtonNextStep text='Confirm'></ButtonNextStep>
+        <ButtonNextStep text="Confirm"></ButtonNextStep>
       </div>
     </form>
   );
