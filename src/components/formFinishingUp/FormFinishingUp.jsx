@@ -4,7 +4,7 @@ import ButtonNextStep from "../formButtons/ButtonNextStep";
 import { useSelector } from "react-redux";
 import "./FormFinishingUp.scss";
 
-const FormFinishingUp = () => {
+const FormFinishingUp = ({ changeThankYouVisible }) => {
   const inputName = useSelector((state) => state[0].inputName);
   const inputEmail = useSelector((state) => state[1].inputEmail);
   const inputPhone = useSelector((state) => state[2].inputPhone);
@@ -15,15 +15,19 @@ const FormFinishingUp = () => {
   const selectProPlane = useSelector((state) => state[3].selectProPlan);
   const selectPricePlane = useSelector((state) => state[3].price);
   const pickAddOnceData = useSelector((state) => state[4].addOnseStep);
-  // pickAddOnceData.forEach((item)=>{
-  //   console.log(item.price);
-  // })
+
   let sum = Number();
   pickAddOnceData.forEach((item) => {
     sum += Number(item.price);
   });
+
+  const submitFormHandler = (e) => {
+    e.preventDefault();
+    changeThankYouVisible();
+  };
+
   return (
-    <form className="form-finishing-up">
+    <form className="form-finishing-up" onSubmit={submitFormHandler}>
       <h1 className="form-finishing-up__title">Finishing up</h1>
       <p className="form-finishing-up__subtitle">
         Double-check everything looks OK before confirming.
@@ -72,7 +76,9 @@ const FormFinishingUp = () => {
         <span className="form-finish-footer__select-title">
           Total (per month)
         </span>
-        <span className="form-finish-footer__total-price">+${sum+selectPricePlane}/mo</span>
+        <span className="form-finish-footer__total-price">
+          +${sum + selectPricePlane}/mo
+        </span>
       </div>
       <div className="form-buttons">
         <ButtonGoBack></ButtonGoBack>

@@ -1,0 +1,54 @@
+@import '../../styles/variables';
+.than-you-page{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  svg{
+    margin-bottom: 30px;
+  }
+  &__title{
+    color: $MarineBlue;
+    margin-bottom: 30px;
+  }
+  &__subtitle{
+    max-width: 400px;
+    text-align: center;
+    color: $CoolGray;
+    line-height: 1.4;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .form-wrapper{
+    position: relative;
+  }
+  .form-aside__wrapper{
+    display: none;
+  }
+  .form-aside__list{
+    display: flex;
+    justify-content: center;
+  }
+  .form-aside__item{
+    margin-bottom: 0 !important;
+  }
+  .from-mobile-wrapper{
+    margin-top: 110px;
+    z-index: 12;
+    position: relative;
+    background: white;
+  }
+  .form-aside{
+    left: 0;
+    right: 0;
+    top: 0;
+    position: absolute;
+    background-position: bottom;
+    height: 300px;
+  }
+  .form-buttons{
+    margin-top: 20px !important;
+  }
+}
