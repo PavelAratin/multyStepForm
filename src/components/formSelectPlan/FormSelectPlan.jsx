@@ -1,14 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./FormSelectPlan.scss";
 import ButtonGoBack from "../formButtons/ButtonGoBack";
 import ButtonNextStep from "../formButtons/ButtonNextStep";
+import { selectArcadePlanActions,selectAdvancedPlanActions,selectProPlanActions } from "../../store/store";
+import { useDispatch } from "react-redux";
 
 const FormSelectPlan = ({changePickAddOneVisible}) => {
   const [arcadeInputIs, setArcadeInputIs] = useState(false);
   const [advancedInputIs, setAdvancedInputIs] = useState(false);
   const [proInputIs, setProInputIs] = useState(false);
-  const [formValidate, setFormValidate] = useState(false);
   const [buttonSelectplaneDisabled, setButtonSelectplaneDisabled] = useState(true);
+  const arcadeInputEl = useRef();
+  const advancedInputEl = useRef();
+  const proInputEl = useRef();
+
+  const arcadeDispatch = useDispatch();
+  const advancedDispatch = useDispatch();
+  const proDispatch = useDispatch();
 
   const arcadeInputHandler = () => {
     setArcadeInputIs(true);
@@ -22,14 +30,22 @@ const FormSelectPlan = ({changePickAddOneVisible}) => {
   const submitFormHandler = (e) => {
     e.preventDefault();
     if (arcadeInputIs || advancedInputIs || proInputIs) {
-      setFormValidate(true);
+      // setFormValidate(true);
       changePickAddOneVisible()
+    }
+    if(arcadeInputIs){
+      arcadeDispatch(selectArcadePlanActions(arcadeInputEl.current.value))
+    }
+    if(advancedInputIs){
+      advancedDispatch(selectAdvancedPlanActions(advancedInputEl.current.value))
+    }
+    if(proInputIs){
+      proDispatch(selectProPlanActions(proInputEl.current.value))
     }
   };
 
   useEffect(()=>{
     if (arcadeInputIs || advancedInputIs || proInputIs) {
-      setFormValidate(true);
       setButtonSelectplaneDisabled(false);
     }
   },[arcadeInputIs,advancedInputIs,proInputIs])
@@ -61,7 +77,8 @@ const FormSelectPlan = ({changePickAddOneVisible}) => {
               className="form-radio-list__input"
               type="radio"
               name="pickAddOne"
-              value="arcade"
+              value="Arcade"
+              ref={arcadeInputEl}
               onChange={arcadeInputHandler}
             ></input>
             <span className="form-radio-list__overlay"></span>
@@ -90,7 +107,8 @@ const FormSelectPlan = ({changePickAddOneVisible}) => {
               className="form-radio-list__input"
               type="radio"
               name="pickAddOne"
-              value="advance"
+              value="Advance"
+              ref={advancedInputEl}
               onChange={advancedInputHandler}
             ></input>
             <span className="form-radio-list__overlay"></span>
@@ -119,7 +137,8 @@ const FormSelectPlan = ({changePickAddOneVisible}) => {
               className="form-radio-list__input"
               type="radio"
               name="pickAddOne"
-              value="pro"
+              value="Pro"
+              ref={proInputEl}
               onChange={proInputHandler}
             ></input>
             <span className="form-radio-list__overlay"></span>

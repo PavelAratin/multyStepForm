@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./FormPickAddOnce.scss";
+import { useDispatch } from "react-redux";
+import { addOnceDataActions } from "../../store/store";
 
 import ButtonGoBack from "../formButtons/ButtonGoBack";
 import ButtonNextStep from "../formButtons/ButtonNextStep";
@@ -9,6 +11,10 @@ const FormPickAddOnce = ({ changeFinishingUpVisible }) => {
   const [largeServiceInput, setLargeServiceInput] = useState(false);
   const [customizeProfileInput, setCustomizeProfileInput] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const onlineServiceInputEl = useRef();
+  const largeServiceInputEl = useRef();
+  const customizeProfileInputEl = useRef();
+  const onlineServiceDispatch = useDispatch();
 
   const changeOnlineServiseInputHandler = () => {
     setOnlineServiseInput((previousState) => !previousState);
@@ -19,19 +25,30 @@ const FormPickAddOnce = ({ changeFinishingUpVisible }) => {
   const changeCustomizeProfileInputHandler = () => {
     setCustomizeProfileInput((previousState) => !previousState);
   };
+  const arrayPick = [];
   const onSubmitFormHandler = (e) => {
     e.preventDefault();
-    console.log("форма отправлена");
-    changeFinishingUpVisible()
+    changeFinishingUpVisible();
+    onlineServiceDispatch(addOnceDataActions(arrayPick));
   };
   useEffect(() => {
     if (onlineServiseInput || largeServiceInput || customizeProfileInput) {
       setButtonDisabled(false);
-    }else{
+    } else {
       setButtonDisabled(true);
     }
   }, [onlineServiseInput, , largeServiceInput, customizeProfileInput]);
   
+  if (onlineServiseInput) {
+    arrayPick.push({ title: "Online service", price: 12 });
+  }
+  if (largeServiceInput) {
+    arrayPick.push({ title: "Large storage", price: 10 });
+  }
+  if (customizeProfileInput) {
+    arrayPick.push({ title: "Customizable profile", price: 8 });
+  }
+
   return (
     <form className="form-add-once" onSubmit={onSubmitFormHandler}>
       <h1 className="form-add-once__title">Pick add-ons</h1>
@@ -45,6 +62,8 @@ const FormPickAddOnce = ({ changeFinishingUpVisible }) => {
               className="form-addonce-list__input"
               type="checkbox"
               name="online service"
+              value="12"
+              ref={onlineServiceInputEl}
               checked={onlineServiseInput}
               onChange={changeOnlineServiseInputHandler}
             ></input>
@@ -56,7 +75,7 @@ const FormPickAddOnce = ({ changeFinishingUpVisible }) => {
                 Access to multiplay games
               </div>
             </div>
-            <span className="form-addonce-list__price">+$1/mo</span>
+            <span className="form-addonce-list__price">+$12/mo</span>
           </label>
         </li>
         <li className="form-addonce-list__item">
@@ -64,7 +83,9 @@ const FormPickAddOnce = ({ changeFinishingUpVisible }) => {
             <input
               className="form-addonce-list__input"
               type="checkbox"
-              name="online service"
+              name="large storage"
+              value="10"
+              ref={largeServiceInputEl}
               checked={largeServiceInput}
               onChange={changeLargeServiceInputHandler}
             ></input>
@@ -76,7 +97,7 @@ const FormPickAddOnce = ({ changeFinishingUpVisible }) => {
                 extra 1TB of cloud save
               </div>
             </div>
-            <span className="form-addonce-list__price">+$2/mo</span>
+            <span className="form-addonce-list__price">+$10/mo</span>
           </label>
         </li>
         <li className="form-addonce-list__item">
@@ -84,7 +105,9 @@ const FormPickAddOnce = ({ changeFinishingUpVisible }) => {
             <input
               className="form-addonce-list__input"
               type="checkbox"
-              name="online service"
+              name="customizable profile"
+              value="8"
+              ref={customizeProfileInputEl}
               checked={customizeProfileInput}
               onChange={changeCustomizeProfileInputHandler}
             ></input>
@@ -98,7 +121,7 @@ const FormPickAddOnce = ({ changeFinishingUpVisible }) => {
                 Custom theme on your profile
               </div>
             </div>
-            <span className="form-addonce-list__price">+$2/mo</span>
+            <span className="form-addonce-list__price">+$8/mo</span>
           </label>
         </li>
       </ul>
