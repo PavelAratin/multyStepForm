@@ -8,13 +8,13 @@ const FormFinishingUp = ({ changeThankYouVisible }) => {
   const inputName = useSelector((state) => state[0].inputName);
   const inputEmail = useSelector((state) => state[1].inputEmail);
   const inputPhone = useSelector((state) => state[2].inputPhone);
-  const selectArcadePlane = useSelector((state) => state[3].selectArcadePlan);
+  const selectArcadePlane = useSelector((state) => state[4].selectArcadePlan);
   const selectAdvancedPlane = useSelector(
     (state) => state[3].selectAdvancedPlan
   );
-  const selectProPlane = useSelector((state) => state[3].selectProPlan);
-  const selectPricePlane = useSelector((state) => state[3].price);
-  const pickAddOnceData = useSelector((state) => state[4].addOnseStep);
+  const selectProPlane = useSelector((state) => state[4].selectProPlan);
+  const selectPricePlane = useSelector((state) => state[4].price);
+  const pickAddOnceData = useSelector((state) => state[5].addOnseStep);
 
   let sum = Number();
   pickAddOnceData.forEach((item) => {

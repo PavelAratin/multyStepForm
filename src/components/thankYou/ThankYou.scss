@@ -51,4 +51,19 @@
   .form-buttons{
     margin-top: 20px !important;
   }
+  .form-radio-list{
+    flex-direction: column;
+    &__svg{
+      margin-bottom: 0;
+      margin-right: 10px;
+    }
+    &__item{
+      width: 100%;
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+  .form-addonce-list__ovelraycheckbox{
+    background-color: transparent;
+  }
 }

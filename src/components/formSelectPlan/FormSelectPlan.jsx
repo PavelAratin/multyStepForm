@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./FormSelectPlan.scss";
 import ButtonGoBack from "../formButtons/ButtonGoBack";
 import ButtonNextStep from "../formButtons/ButtonNextStep";
-import { selectArcadePlanActions,selectAdvancedPlanActions,selectProPlanActions } from "../../store/store";
+import { selectArcadePlanActions,selectAdvancedPlanActions,selectProPlanActions,formStepNumberActions} from "../../store/store";
 import { useDispatch } from "react-redux";
 
 const FormSelectPlan = ({changePickAddOneVisible}) => {
@@ -17,6 +17,7 @@ const FormSelectPlan = ({changePickAddOneVisible}) => {
   const arcadeDispatch = useDispatch();
   const advancedDispatch = useDispatch();
   const proDispatch = useDispatch();
+  const stepNumberDispatch = useDispatch();
 
   const arcadeInputHandler = () => {
     setArcadeInputIs(true);
@@ -42,6 +43,7 @@ const FormSelectPlan = ({changePickAddOneVisible}) => {
     if(proInputIs){
       proDispatch(selectProPlanActions(proInputEl.current.value))
     }
+    stepNumberDispatch(formStepNumberActions(3))
   };
 
   useEffect(()=>{

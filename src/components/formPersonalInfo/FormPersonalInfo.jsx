@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ButtonGoBack from "../formButtons/ButtonGoBack";
 import ButtonNextStep from "../formButtons/ButtonNextStep";
 import { useDispatch } from "react-redux";
-import { nameActions,emailActions,phoneActions } from "../../store/store";
+import { nameActions,emailActions,phoneActions,formStepNumberTwoActions } from "../../store/store";
 import "./FormPersonalInfo.scss";
 
 const FormPersonalInfo = ({ changeFormPersonalVisible }) => {
@@ -12,7 +12,6 @@ const FormPersonalInfo = ({ changeFormPersonalVisible }) => {
   const [inputEmailValidate, setInputEmailValidate] = useState(false);
   const [inputTelephone, setInputTelephone] = useState("");
   const [inputTelephoneValidate, setInputTelephoneValidate] = useState(false);
-  // const [allInputsvalidate, setAllInputsvalidate] = useState(false);
   const [buttonPersonalFormDisabled, setButtonPersonalFormDisabled] =
     useState(true);
   //regexp на числа в инпуте телефона
@@ -64,6 +63,7 @@ const FormPersonalInfo = ({ changeFormPersonalVisible }) => {
     const nameDispatch = useDispatch();
     const emailDispatch = useDispatch();
     const phoneDispatch = useDispatch();
+    const stepNumberDispatch = useDispatch();
     
     const submitFormHandler = (e) => {
       e.preventDefault();
@@ -71,6 +71,7 @@ const FormPersonalInfo = ({ changeFormPersonalVisible }) => {
       nameDispatch(nameActions(inputName))
       emailDispatch(emailActions(inputEmail))
       phoneDispatch(phoneActions(inputTelephone))
+      stepNumberDispatch(formStepNumberTwoActions(2))
     };
   return (
     <form className="form-personal-info" onSubmit={submitFormHandler}>

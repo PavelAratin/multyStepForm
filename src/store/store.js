@@ -60,8 +60,28 @@ const reducer = (state = [], action) => {
     return [
       ...state,
       {
-        addOnseStep:action.addOnceData
+        addOnseStep: action.addOnceData
       }
+    ]
+  }
+
+  if (action.type === 'FORM_STEP_NUMBER_TWO') {
+    return [
+      ...state,
+      {
+        stepForm: action.formStepNumber
+      }
+    ]
+  }
+  if (action.type === 'FORM_STEP_NUMBER') {
+    state = state.map((item) => {
+      if ("stepForm" in item) {
+        item.stepForm = action.formStepNumber
+      }
+      return item;
+    })
+    return [
+      ...state,
     ]
   }
 
@@ -110,5 +130,19 @@ export const addOnceDataActions = (addOnceData) => {
   return {
     type: 'ADD_ONCE_PICK',
     addOnceData
+  }
+}
+
+export const formStepNumberTwoActions = (formStepNumber) => {
+  return {
+    type: 'FORM_STEP_NUMBER_TWO',
+    formStepNumber
+  }
+}
+
+export const formStepNumberActions = (formStepNumber) => {
+  return {
+    type: 'FORM_STEP_NUMBER',
+    formStepNumber
   }
 }

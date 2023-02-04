@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./FormPickAddOnce.scss";
 import { useDispatch } from "react-redux";
-import { addOnceDataActions } from "../../store/store";
+import { addOnceDataActions,formStepNumberActions } from "../../store/store";
 
 import ButtonGoBack from "../formButtons/ButtonGoBack";
 import ButtonNextStep from "../formButtons/ButtonNextStep";
@@ -15,6 +15,7 @@ const FormPickAddOnce = ({ changeFinishingUpVisible }) => {
   const largeServiceInputEl = useRef();
   const customizeProfileInputEl = useRef();
   const onlineServiceDispatch = useDispatch();
+  const formStepDispatch = useDispatch();
 
   const changeOnlineServiseInputHandler = () => {
     setOnlineServiseInput((previousState) => !previousState);
@@ -30,6 +31,7 @@ const FormPickAddOnce = ({ changeFinishingUpVisible }) => {
     e.preventDefault();
     changeFinishingUpVisible();
     onlineServiceDispatch(addOnceDataActions(arrayPick));
+    formStepDispatch(formStepNumberActions(4))
   };
   useEffect(() => {
     if (onlineServiseInput || largeServiceInput || customizeProfileInput) {
