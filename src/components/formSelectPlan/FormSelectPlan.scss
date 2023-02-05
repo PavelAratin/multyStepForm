@@ -17,6 +17,7 @@
 .form-radio-list{
   display: flex;
   gap: 10px;
+  margin-bottom: 30px;
   &__item{
     position: relative;
     display: flex;
@@ -80,5 +81,70 @@
     z-index: 3;
     pointer-events: none;
     cursor: pointer;
+    &-yo{
+      color: $MarineBlue;
+      position: relative;
+      z-index: 3;
+      pointer-events: none;
+    }
+  }
+}
+.form-input-toggle{
+  background-color: $LightBlue;
+  padding: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__input{
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    order: 1;
+    &:checked + .form-input-toggle__switch::before{
+      transform: translateX(100%);
+    }
+  }
+  &__label{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  &__text{
+    color: $CoolGray;
+    font-size: 16px;
+    font-weight: 600;
+    &--order2{
+      order: 2;
+    }
+    &--order4{
+      order: 4;
+    }
+    &.active{
+      color: $MarineBlue;
+    }
+  }
+  &__switch{
+    width: 50px;
+    height: 30px;
+    padding: 5px;
+    background-color: $MarineBlue;
+    border-radius: 50px;
+    position: relative;
+    order: 3;
+    &::before{
+      content: '';
+      display: block;
+      width: 20px;
+      height: 20px;
+      border-radius: 100%;
+      background-color: $White;
+      position: absolute;
+      transform: translateX(0);
+      transition: all 0.1s linear;
+    }
   }
 }

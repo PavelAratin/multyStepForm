@@ -2,14 +2,21 @@ import React, { useEffect, useRef, useState } from "react";
 import "./FormSelectPlan.scss";
 import ButtonGoBack from "../formButtons/ButtonGoBack";
 import ButtonNextStep from "../formButtons/ButtonNextStep";
-import { selectArcadePlanActions,selectAdvancedPlanActions,selectProPlanActions,formStepNumberActions} from "../../store/store";
+import {
+  selectArcadePlanActions,
+  selectAdvancedPlanActions,
+  selectProPlanActions,
+  formStepNumberActions,
+} from "../../store/store";
 import { useDispatch } from "react-redux";
 
-const FormSelectPlan = ({changePickAddOneVisible}) => {
+const FormSelectPlan = ({ changePickAddOneVisible }) => {
   const [arcadeInputIs, setArcadeInputIs] = useState(false);
   const [advancedInputIs, setAdvancedInputIs] = useState(false);
   const [proInputIs, setProInputIs] = useState(false);
-  const [buttonSelectplaneDisabled, setButtonSelectplaneDisabled] = useState(true);
+  const [moYoToggleInputIs, setMoYoToggleInputIs] = useState(false);
+  const [buttonSelectplaneDisabled, setButtonSelectplaneDisabled] =
+    useState(true);
   const arcadeInputEl = useRef();
   const advancedInputEl = useRef();
   const proInputEl = useRef();
@@ -28,29 +35,34 @@ const FormSelectPlan = ({changePickAddOneVisible}) => {
   const proInputHandler = () => {
     setProInputIs(true);
   };
+  const changeMoYoToggleHadler = () => {
+    setMoYoToggleInputIs((previousState) => !previousState);
+  };
+  console.log(moYoToggleInputIs);
   const submitFormHandler = (e) => {
     e.preventDefault();
     if (arcadeInputIs || advancedInputIs || proInputIs) {
-      // setFormValidate(true);
-      changePickAddOneVisible()
+      changePickAddOneVisible();
     }
-    if(arcadeInputIs){
-      arcadeDispatch(selectArcadePlanActions(arcadeInputEl.current.value))
+    if (arcadeInputIs) {
+      arcadeDispatch(selectArcadePlanActions(arcadeInputEl.current.value));
     }
-    if(advancedInputIs){
-      advancedDispatch(selectAdvancedPlanActions(advancedInputEl.current.value))
+    if (advancedInputIs) {
+      advancedDispatch(
+        selectAdvancedPlanActions(advancedInputEl.current.value)
+      );
     }
-    if(proInputIs){
-      proDispatch(selectProPlanActions(proInputEl.current.value))
+    if (proInputIs) {
+      proDispatch(selectProPlanActions(proInputEl.current.value));
     }
-    stepNumberDispatch(formStepNumberActions(3))
+    stepNumberDispatch(formStepNumberActions(3));
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (arcadeInputIs || advancedInputIs || proInputIs) {
       setButtonSelectplaneDisabled(false);
     }
-  },[arcadeInputIs,advancedInputIs,proInputIs])
+  }, [arcadeInputIs, advancedInputIs, proInputIs]);
   return (
     <form className="form-select-plan" onSubmit={submitFormHandler}>
       <h1 className="form-select-plan__title">Select you plan</h1>
@@ -85,7 +97,12 @@ const FormSelectPlan = ({changePickAddOneVisible}) => {
             ></input>
             <span className="form-radio-list__overlay"></span>
             <span className="form-radio-list__title">Arcade</span>
-            <span className="form-radio-list__subtitle">$9/mo</span>
+            <span className="form-radio-list__subtitle">
+              {moYoToggleInputIs ? "$90/yr" : "$9/mo"}
+            </span>
+            {
+              moYoToggleInputIs && <span className="form-radio-list__subtitle-yo">2 months free</span>
+            }
           </label>
         </li>
         <li className="form-radio-list__item">
@@ -115,7 +132,12 @@ const FormSelectPlan = ({changePickAddOneVisible}) => {
             ></input>
             <span className="form-radio-list__overlay"></span>
             <span className="form-radio-list__title">Advanced</span>
-            <span className="form-radio-list__subtitle">$12/mo</span>
+            <span className="form-radio-list__subtitle">
+              {moYoToggleInputIs ? "$120/yr" : "$12/mo"}
+            </span>
+            {
+              moYoToggleInputIs && <span className="form-radio-list__subtitle-yo">2 months free</span>
+            }
           </label>
         </li>
         <li className="form-radio-list__item">
@@ -145,10 +167,40 @@ const FormSelectPlan = ({changePickAddOneVisible}) => {
             ></input>
             <span className="form-radio-list__overlay"></span>
             <span className="form-radio-list__title">Pro</span>
-            <span className="form-radio-list__subtitle">$15/mo</span>
+            <span className="form-radio-list__subtitle">
+              {moYoToggleInputIs ? "$150/yr" : "$15/mo"}
+            </span>
+            {
+              moYoToggleInputIs && <span className="form-radio-list__subtitle-yo">2 months free</span>
+            }
           </label>
         </li>
       </ul>
+      <div className="form-input-toggle">
+        <label className="form-input-toggle__label">
+          <input
+            className="form-input-toggle__input"
+            type="checkbox"
+            checked={moYoToggleInputIs}
+            onChange={changeMoYoToggleHadler}
+          />
+          <span className="form-input-toggle__switch"></span>
+          <span
+            className={`form-input-toggle__text form-input-toggle__text--order2 ${
+              moYoToggleInputIs ? "" : "active"
+            }`}
+          >
+            Monthly
+          </span>
+          <span
+            className={`form-input-toggle__text form-input-toggle__text--order4 ${
+              moYoToggleInputIs ? "active" : ""
+            }`}
+          >
+            Yearly
+          </span>
+        </label>
+      </div>
       <div className="form-buttons">
         <ButtonGoBack></ButtonGoBack>
         <ButtonNextStep

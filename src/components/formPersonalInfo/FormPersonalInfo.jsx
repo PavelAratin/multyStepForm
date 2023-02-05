@@ -116,7 +116,7 @@ const FormPersonalInfo = ({ changeFormPersonalVisible }) => {
         ></input>
       </label>
       <div className="form-buttons">
-        <ButtonGoBack></ButtonGoBack>
+        {/* <ButtonGoBack></ButtonGoBack> */}
         <ButtonNextStep
           buttonPersonalFormDisabled={buttonPersonalFormDisabled}
         ></ButtonNextStep>
