@@ -15,6 +15,7 @@ const FormFinishingUp = ({ changeThankYouVisible }) => {
   const selectProPlane = useSelector((state) => state[4].selectProPlan);
   const selectPricePlane = useSelector((state) => state[4].price);
   const pickAddOnceData = useSelector((state) => state[5].addOnseStep);
+  const moYoToggleInputIs = useSelector((state) => state[4].moYoToggleIs);
 
   let sum = Number();
   pickAddOnceData.forEach((item) => {
@@ -52,13 +53,12 @@ const FormFinishingUp = ({ changeThankYouVisible }) => {
             <span className="form-finish__title">
               {selectArcadePlane}
               {selectAdvancedPlane}
-              {selectProPlane}
-              (Monthly)
+              {selectProPlane}({moYoToggleInputIs ? "Yearly" : "Monthly"})
             </span>
             <span className="form-finish__change">Change</span>
           </div>
           <span className="form-finish__arcade-price">
-            ${selectPricePlane}/mo
+            ${selectPricePlane}/{moYoToggleInputIs ? "yo" : "mo"}
           </span>
         </div>
         <ul className="form-finish__list">
@@ -66,7 +66,7 @@ const FormFinishingUp = ({ changeThankYouVisible }) => {
             <li className="form-finish__item" key={item.title}>
               <span className="form-finish__select-title">{item.title}</span>
               <span className="form-finish__select-price">
-                +${item.price}/mo
+                +${item.price}/{moYoToggleInputIs ? "yo" : "mo"}
               </span>
             </li>
           ))}
@@ -74,10 +74,10 @@ const FormFinishingUp = ({ changeThankYouVisible }) => {
       </div>
       <div className="form-finish-footer">
         <span className="form-finish-footer__select-title">
-          Total (per month)
+          Total (per {moYoToggleInputIs ? "Year" : "Month"})
         </span>
         <span className="form-finish-footer__total-price">
-          +${sum + selectPricePlane}/mo
+          +${sum + selectPricePlane}/{moYoToggleInputIs ? "yo" : "mo"}
         </span>
       </div>
       <div className="form-buttons">

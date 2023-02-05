@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./FormPickAddOnce.scss";
-import { useDispatch } from "react-redux";
-import { addOnceDataActions,formStepNumberActions } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { addOnceDataActions, formStepNumberActions } from "../../store/store";
 
 import ButtonGoBack from "../formButtons/ButtonGoBack";
 import ButtonNextStep from "../formButtons/ButtonNextStep";
@@ -16,6 +16,7 @@ const FormPickAddOnce = ({ changeFinishingUpVisible }) => {
   const customizeProfileInputEl = useRef();
   const onlineServiceDispatch = useDispatch();
   const formStepDispatch = useDispatch();
+  const moYoToggleIs = useSelector((state) => state[4].moYoToggleIs);
 
   const changeOnlineServiseInputHandler = () => {
     setOnlineServiseInput((previousState) => !previousState);
@@ -31,7 +32,7 @@ const FormPickAddOnce = ({ changeFinishingUpVisible }) => {
     e.preventDefault();
     changeFinishingUpVisible();
     onlineServiceDispatch(addOnceDataActions(arrayPick));
-    formStepDispatch(formStepNumberActions(4))
+    formStepDispatch(formStepNumberActions(4));
   };
   useEffect(() => {
     if (onlineServiseInput || largeServiceInput || customizeProfileInput) {
@@ -40,15 +41,24 @@ const FormPickAddOnce = ({ changeFinishingUpVisible }) => {
       setButtonDisabled(true);
     }
   }, [onlineServiseInput, , largeServiceInput, customizeProfileInput]);
-  
+
   if (onlineServiseInput) {
-    arrayPick.push({ title: "Online service", price: 12 });
+    arrayPick.push({
+      title: "Online service",
+      price: Number(onlineServiceInputEl.current.value),
+    });
   }
   if (largeServiceInput) {
-    arrayPick.push({ title: "Large storage", price: 10 });
+    arrayPick.push({
+      title: "Large storage",
+      price: Number(largeServiceInputEl.current.value),
+    });
   }
   if (customizeProfileInput) {
-    arrayPick.push({ title: "Customizable profile", price: 8 });
+    arrayPick.push({
+      title: "Customizable profile",
+      price: Number(customizeProfileInputEl.current.value),
+    });
   }
 
   return (
@@ -64,7 +74,7 @@ const FormPickAddOnce = ({ changeFinishingUpVisible }) => {
               className="form-addonce-list__input"
               type="checkbox"
               name="online service"
-              value="12"
+              value={moYoToggleIs ? "120" : "12"}
               ref={onlineServiceInputEl}
               checked={onlineServiseInput}
               onChange={changeOnlineServiseInputHandler}
@@ -77,7 +87,9 @@ const FormPickAddOnce = ({ changeFinishingUpVisible }) => {
                 Access to multiplay games
               </div>
             </div>
-            <span className="form-addonce-list__price">+$12/mo</span>
+            <span className="form-addonce-list__price">
+              {moYoToggleIs ? "+$120/yo" : "+$12/mo"}
+            </span>
           </label>
         </li>
         <li className="form-addonce-list__item">
@@ -86,7 +98,7 @@ const FormPickAddOnce = ({ changeFinishingUpVisible }) => {
               className="form-addonce-list__input"
               type="checkbox"
               name="large storage"
-              value="10"
+              value={moYoToggleIs ? "100" : "10"}
               ref={largeServiceInputEl}
               checked={largeServiceInput}
               onChange={changeLargeServiceInputHandler}
@@ -99,7 +111,9 @@ const FormPickAddOnce = ({ changeFinishingUpVisible }) => {
                 extra 1TB of cloud save
               </div>
             </div>
-            <span className="form-addonce-list__price">+$10/mo</span>
+            <span className="form-addonce-list__price">
+              {moYoToggleIs ? "+$100/yo" : "+$10/mo"}
+            </span>
           </label>
         </li>
         <li className="form-addonce-list__item">
@@ -108,7 +122,7 @@ const FormPickAddOnce = ({ changeFinishingUpVisible }) => {
               className="form-addonce-list__input"
               type="checkbox"
               name="customizable profile"
-              value="8"
+              value={moYoToggleIs ? "80" : "8"}
               ref={customizeProfileInputEl}
               checked={customizeProfileInput}
               onChange={changeCustomizeProfileInputHandler}
@@ -123,7 +137,9 @@ const FormPickAddOnce = ({ changeFinishingUpVisible }) => {
                 Custom theme on your profile
               </div>
             </div>
-            <span className="form-addonce-list__price">+$8/mo</span>
+            <span className="form-addonce-list__price">
+              {moYoToggleIs ? "+$80/yo" : "+$8/mo"}
+            </span>
           </label>
         </li>
       </ul>

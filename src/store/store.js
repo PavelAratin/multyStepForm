@@ -10,7 +10,6 @@ const reducer = (state = [], action) => {
       }
     ]
   }
-
   if (action.type === 'ADD_INPUT_EMAIL') {
     return [
       ...state,
@@ -19,7 +18,6 @@ const reducer = (state = [], action) => {
       }
     ]
   }
-
   if (action.type === 'ADD_INPUT_PHONE') {
     return [
       ...state,
@@ -28,31 +26,51 @@ const reducer = (state = [], action) => {
       }
     ]
   }
-
   if (action.type === 'SELECT_ARCADE_PLAN') {
+    let price = 0;
+    if (action.moYoToggleIs) {
+      price = 90
+    } else {
+      price = 9
+    }
     return [
       ...state,
       {
         selectArcadePlan: action.selectPlan,
-        price: 9,
+        price: price,
+        moYoToggleIs: action.moYoToggleIs
       }
     ]
   }
   if (action.type === 'SELECT_ADVANCED_PLAN') {
+    let price = 0;
+    if (action.moYoToggleIs) {
+      price = 120
+    } else {
+      price = 12
+    }
     return [
       ...state,
       {
         selectAdvancedPlan: action.selectPlan,
-        price: 12,
+        price: price,
+        moYoToggleIs: action.moYoToggleIs
       }
     ]
   }
   if (action.type === 'SELECT_PRO_PLAN') {
+    let price = 0;
+    if (action.moYoToggleIs) {
+      price = 150
+    } else {
+      price = 15
+    }
     return [
       ...state,
       {
         selectProPlan: action.selectPlan,
-        price: 15,
+        price: price,
+        moYoToggleIs: action.moYoToggleIs
       }
     ]
   }
@@ -64,7 +82,6 @@ const reducer = (state = [], action) => {
       }
     ]
   }
-
   if (action.type === 'FORM_STEP_NUMBER_TWO') {
     return [
       ...state,
@@ -108,22 +125,25 @@ export const phoneActions = (inputPhoneValue) => {
     inputPhoneValue
   }
 }
-export const selectArcadePlanActions = (selectPlan) => {
+export const selectArcadePlanActions = (selectPlan, moYoToggleIs) => {
   return {
     type: 'SELECT_ARCADE_PLAN',
-    selectPlan
+    selectPlan,
+    moYoToggleIs
   }
 }
-export const selectAdvancedPlanActions = (selectPlan) => {
+export const selectAdvancedPlanActions = (selectPlan, moYoToggleIs) => {
   return {
     type: 'SELECT_ADVANCED_PLAN',
-    selectPlan
+    selectPlan,
+    moYoToggleIs
   }
 }
-export const selectProPlanActions = (selectPlan) => {
+export const selectProPlanActions = (selectPlan, moYoToggleIs) => {
   return {
     type: 'SELECT_PRO_PLAN',
-    selectPlan
+    selectPlan,
+    moYoToggleIs
   }
 }
 export const addOnceDataActions = (addOnceData) => {
@@ -132,14 +152,12 @@ export const addOnceDataActions = (addOnceData) => {
     addOnceData
   }
 }
-
 export const formStepNumberTwoActions = (formStepNumber) => {
   return {
     type: 'FORM_STEP_NUMBER_TWO',
     formStepNumber
   }
 }
-
 export const formStepNumberActions = (formStepNumber) => {
   return {
     type: 'FORM_STEP_NUMBER',

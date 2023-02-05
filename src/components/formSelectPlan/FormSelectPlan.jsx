@@ -26,6 +26,7 @@ const FormSelectPlan = ({ changePickAddOneVisible }) => {
   const proDispatch = useDispatch();
   const stepNumberDispatch = useDispatch();
 
+
   const arcadeInputHandler = () => {
     setArcadeInputIs(true);
   };
@@ -45,15 +46,22 @@ const FormSelectPlan = ({ changePickAddOneVisible }) => {
       changePickAddOneVisible();
     }
     if (arcadeInputIs) {
-      arcadeDispatch(selectArcadePlanActions(arcadeInputEl.current.value));
+      arcadeDispatch(
+        selectArcadePlanActions(arcadeInputEl.current.value, moYoToggleInputIs)
+      );
     }
     if (advancedInputIs) {
       advancedDispatch(
-        selectAdvancedPlanActions(advancedInputEl.current.value)
+        selectAdvancedPlanActions(
+          advancedInputEl.current.value,
+          moYoToggleInputIs
+        )
       );
     }
     if (proInputIs) {
-      proDispatch(selectProPlanActions(proInputEl.current.value));
+      proDispatch(
+        selectProPlanActions(proInputEl.current.value, moYoToggleInputIs)
+      );
     }
     stepNumberDispatch(formStepNumberActions(3));
   };
@@ -63,6 +71,7 @@ const FormSelectPlan = ({ changePickAddOneVisible }) => {
       setButtonSelectplaneDisabled(false);
     }
   }, [arcadeInputIs, advancedInputIs, proInputIs]);
+
   return (
     <form className="form-select-plan" onSubmit={submitFormHandler}>
       <h1 className="form-select-plan__title">Select you plan</h1>
@@ -100,9 +109,11 @@ const FormSelectPlan = ({ changePickAddOneVisible }) => {
             <span className="form-radio-list__subtitle">
               {moYoToggleInputIs ? "$90/yr" : "$9/mo"}
             </span>
-            {
-              moYoToggleInputIs && <span className="form-radio-list__subtitle-yo">2 months free</span>
-            }
+            {moYoToggleInputIs && (
+              <span className="form-radio-list__subtitle-yo">
+                2 months free
+              </span>
+            )}
           </label>
         </li>
         <li className="form-radio-list__item">
@@ -135,9 +146,11 @@ const FormSelectPlan = ({ changePickAddOneVisible }) => {
             <span className="form-radio-list__subtitle">
               {moYoToggleInputIs ? "$120/yr" : "$12/mo"}
             </span>
-            {
-              moYoToggleInputIs && <span className="form-radio-list__subtitle-yo">2 months free</span>
-            }
+            {moYoToggleInputIs && (
+              <span className="form-radio-list__subtitle-yo">
+                2 months free
+              </span>
+            )}
           </label>
         </li>
         <li className="form-radio-list__item">
@@ -170,9 +183,11 @@ const FormSelectPlan = ({ changePickAddOneVisible }) => {
             <span className="form-radio-list__subtitle">
               {moYoToggleInputIs ? "$150/yr" : "$15/mo"}
             </span>
-            {
-              moYoToggleInputIs && <span className="form-radio-list__subtitle-yo">2 months free</span>
-            }
+            {moYoToggleInputIs && (
+              <span className="form-radio-list__subtitle-yo">
+                2 months free
+              </span>
+            )}
           </label>
         </li>
       </ul>
